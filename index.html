@@ -1,0 +1,2105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MathTools - Base Conversion & Circle Theorems</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { 'sans': ['Inter','system-ui','sans-serif'] },
+          colors: {
+            'math-blue':'#2563eb','math-green':'#059669','math-red':'#dc2626','math-amber':'#f59e0b'
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-50 font-sans text-slate-700">
+
+<!-- ---------- Header ---------- -->
+<header class="bg-white shadow-sm border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center space-x-4">
+        <i class="fas fa-calculator text-2xl text-math-blue"></i>
+        <h1 class="text-xl font-bold text-slate-900">MathTools</h1>
+      </div>
+      <nav class="hidden md:flex space-x-8">
+        <a href="#base-conversion" class="text-slate-600 hover:text-math-blue transition-colors font-medium">Base Conversion</a>
+        <a href="#circle-theorems" class="text-slate-600 hover:text-math-blue transition-colors font-medium">Circle Theorems</a>
+      </nav>
+      <button class="md:hidden">
+        <i class="fas fa-bars text-slate-600"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ---------- Hero ---------- -->
+<section class="bg-gradient-to-br from-math-blue to-indigo-700 text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Interactive Mathematics Learning</h2>
+    <p class="text-xl text-indigo-100 mb-8 max-w-3xl mx-auto">Master base conversions and explore circle theorems with our interactive tools.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#base-conversion" class="bg-white text-math-blue px-8 py-3 rounded-lg font-semibold hover:bg-slate-100 transition-colors inline-flex items-center">
+        <i class="fas fa-exchange-alt mr-2"></i>Start Converting
+      </a>
+      <a href="#circle-theorems" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-math-blue transition-colors inline-flex items-center">
+        <i class="fas fa-circle mr-2"></i>Explore Theorems
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- Base Conversion ---------- -->
+<section id="base-conversion" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h3 class="text-3xl font-bold text-slate-900 mb-4">Base Conversion Tool</h3>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto">Convert numbers between binary, decimal, octal, and hexadecimal with a detailed step-by-step breakdown.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Input & Result -->
+      <div class="bg-slate-50 rounded-xl p-8">
+        <h4 class="text-xl font-semibold mb-6 text-slate-900">Convert Your Number</h4>
+
+        <div class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-2">Input Number</label>
+            <input id="bc-input" type="text" placeholder="Enter number (e.g. 101101)" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-math-blue focus:border-transparent">
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">From Base</label>
+              <select id="bc-from" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-math-blue focus:border-transparent">
+                <option value="10">Decimal (10)</option>
+                <option value="2">Binary (2)</option>
+                <option value="8">Octal (8)</option>
+                <option value="16">Hexadecimal (16)</option>
+                <!-- additional options 2..36 -->
+                <option value="3">Base 3</option><option value="4">Base 4</option><option value="5">Base 5</option>
+                <option value="6">Base 6</option><option value="7">Base 7</option><option value="9">Base 9</option>
+                <option value="11">11</option><option value="12">12</option><option value="13">13</option>
+                <option value="14">14</option><option value="15">15</option><option value="17">17</option>
+                <option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                <option value="21">21</option><option value="22">22</option><option value="23">23</option>
+                <option value="24">24</option><option value="25">25</option><option value="26">26</option>
+                <option value="27">27</option><option value="28">28</option><option value="29">29</option>
+                <option value="30">30</option><option value="31">31</option><option value="32">32</option>
+                <option value="33">33</option><option value="34">34</option><option value="35">35</option>
+                <option value="36">36</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">To Base</label>
+              <select id="bc-to" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-math-blue focus:border-transparent">
+                <option value="2">Binary (2)</option>
+                <option value="10" selected>Decimal (10)</option>
+                <option value="8">Octal (8)</option>
+                <option value="16">Hexadecimal (16)</option>
+                <!-- most common and others -->
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                <option value="6">6</option><option value="7">7</option><option value="9">9</option>
+                <option value="11">11</option><option value="12">12</option><option value="13">13</option>
+                <option value="14">14</option><option value="15">15</option><option value="17">17</option>
+                <option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                <option value="21">21</option><option value="22">22</option><option value="23">23</option>
+                <option value="24">24</option><option value="25">25</option><option value="26">26</option>
+                <option value="27">27</option><option value="28">28</option><option value="29">29</option>
+                <option value="30">30</option><option value="31">31</option><option value="32">32</option>
+                <option value="33">33</option><option value="34">34</option><option value="35">35</option>
+                <option value="36">36</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex gap-3">
+            <button id="bc-convert" class="flex-1 w-full bg-math-blue text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              <i class="fas fa-calculator mr-2"></i>Convert
+            </button>
+            <button id="bc-swap" class="w-28 bg-white border border-slate-300 rounded-lg text-slate-700 font-semibold hover:bg-slate-100 transition-colors">
+              Swap
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Display -->
+        <div class="mt-8 p-6 bg-white rounded-lg border border-slate-200">
+          <h5 class="font-semibold text-slate-900 mb-3">Result</h5>
+          <div id="bc-result" class="text-2xl font-mono text-math-blue">—</div>
+          <div id="bc-notation" class="text-sm text-slate-600 mt-1">Enter values and click Convert</div>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Process (will be dynamically updated) -->
+      <div class="bg-slate-50 rounded-xl p-8">
+        <h4 class="text-xl font-semibold mb-6 text-slate-900">Step-by-Step Process</h4>
+
+        <div id="bc-steps" class="space-y-4">
+          <div class="bg-white rounded-lg p-4 border-l-4 border-math-blue">
+            <div class="flex items-center mb-2">
+              <div class="w-8 h-8 bg-math-blue text-white rounded-full flex items-center justify-center text-sm font-semibold mr-3">1</div>
+              <h6 class="font-semibold text-slate-900">Convert to Base 10</h6>
+            </div>
+            <p class="text-slate-600 ml-11">No input yet</p>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 border-l-4 border-math-green">
+            <div class="flex items-center mb-2">
+              <div class="w-8 h-8 bg-math-green text-white rounded-full flex items-center justify-center text-sm font-semibold mr-3">2</div>
+              <h6 class="font-semibold text-slate-900">Convert from Base 10</h6>
+            </div>
+            <div class="ml-11 space-y-1 font-mono text-sm">
+              <p class="text-slate-600">No steps yet</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 border-l-4 border-math-red">
+            <div class="flex items-center mb-2">
+              <div class="w-8 h-8 bg-math-red text-white rounded-full flex items-center justify-center text-sm font-semibold mr-3">3</div>
+              <h6 class="font-semibold text-slate-900">Read Remainders</h6>
+            </div>
+            <p class="text-slate-600 ml-11">Result will appear here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ---------- Circle Theorems ---------- -->
+<section id="circle-theorems" class="py-16 bg-slate-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h3 class="text-3xl font-bold text-slate-900 mb-4">Interactive Circle Theorems</h3>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto">Explore and manipulate geometric relationships with interactive diagrams. Drag points to see how angles change in real-time.</p>
+    </div>
+
+    <!-- Theorem 1 -->
+    <div class="bg-white rounded-none shadow-sm border border-slate-200 p-4 w-full min-h-screen">
+      <div class="grid lg:grid-cols-2 gap-8  w-full h-full">
+        <div class="flex flex-col justify-start w-full h-full">
+          <h4 class="text-2xl font-semibold text-slate-900 mb-4 flex items-center">
+            <i class="fas fa-circle-dot text-math-blue mr-3"></i>
+            Angle at the Centre Theorem
+          </h4>
+          <p class="text-slate-600 mb-6">The angle subtended at the center of a circle by an arc is twice the angle subtended at the circumference by the same chord.</p>
+
+          <div class="bg-slate-50 rounded-lg p-4 mb-6 w-full">
+            <h5 class="font-semibold text-slate-700 mb-2">Key Points:</h5>
+            <ul class="text-sm text-slate-600 space-y-1">
+              <li>• Central angle = 2 × Inscribed angle</li>
+              <li>• Both angles subtend the same arc</li>
+              <li>• Works for any position on the circumference</li>
+            </ul>
+          </div>
+
+          <div class="space-y-6 w-full">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">
+                Adjust Central Angle (degrees)
+              </label>
+              <input id="t1-slider" type="range" min="0" max="360" step="0.001" value="120" class="w-full accent-math-blue">
+              <div class="flex justify-between text-xs text-slate-500 mt-1">
+                <span>0°</span>
+                <span id="t1-slider-value">120.0°</span>
+                <span>360°</span>
+              </div>
+            </div>
+
+  <div class="grid grid-cols-2 gap-4 text-center">
+    <div class="bg-math-blue bg-opacity-10 rounded-lg p-4">
+      <div class="text-sm text-slate-600">Central Angle</div>
+      <div class="text-3xl font-bold text-math-blue" data-bind="centralAngle">120.0°</div>
+    </div>
+    <div class="bg-math-green bg-opacity-10 rounded-lg p-4">
+      <div class="text-sm text-slate-600">Inscribed Angle</div>
+      <div class="text-3xl font-bold text-math-green" data-bind="inscribedAngle">60.0°</div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+  <div class="bg-slate-50 rounded-lg p-4 w-full h-full flex flex-col items-center justify-center">
+  <svg viewBox="0 0 400 400" class="w-full max-w-2xl h-auto border rounded" id="svg-theorem-1">
+    <!-- Circle -->
+    <circle id="circle" cx="200" cy="200" r="150" fill="none" stroke="#64748b" stroke-width="2"/>
+
+    <!-- Center O -->
+    <circle id="pointO" cx="200" cy="200" r="4" fill="#2563eb"/>
+    <text id="labelO" x="205" y="195" font-size="12" fill="#334155">O</text>
+
+    <!-- Points on circumference -->
+    <circle id="pointA" r="6" fill="#059669" data-draggable="true"/>
+    <text id="labelA" font-size="12" fill="#334155">A</text>
+
+    <circle id="pointB" r="6" fill="#059669"/>
+    <text id="labelB" font-size="12" fill="#334155">B</text>
+
+    <circle id="pointC" r="6" fill="#dc2626" data-draggable="true"/>
+    <text id="labelC" font-size="12" fill="#334155">C</text>
+
+    <!-- Lines -->
+    <line id="lineOA" stroke="#2563eb" stroke-width="2"/>
+    <line id="lineOB" stroke="#2563eb" stroke-width="2"/>
+    <line id="lineAB" stroke="#64748b" stroke-width="1" stroke-dasharray="5,5"/>
+    <line id="lineCA" stroke="#dc2626" stroke-width="2"/>
+    <line id="lineCB" stroke="#dc2626" stroke-width="2"/>
+
+    <!-- Angle arcs -->
+    <path id="arcO" fill="none" stroke="#2563eb" stroke-width="2" opacity="0.85"/>
+    <path id="arcC" fill="none" stroke="#dc2626" stroke-width="2" opacity="0.85"/>
+
+    <!-- Angle text -->
+    <text id="textCentral" font-size="14" font-weight="600" fill="#2563eb">120.0°</text>
+    <text id="textInscribed" font-size="14" font-weight="600" fill="#dc2626">60.0°</text>
+  </svg>
+
+  <p class="text-xs text-slate-500 mt-2 text-center">Drag A (green) to rotate the chord; drag C (red) anywhere on the circle. The slider changes the central angle; B follows so ∠AOB = slider value and ∠ACB = half.</p>
+</div>
+</div>
+</div>
+
+    <!-- Theorem 2 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 w-full min-h-screen">
+      <div class="grid lg:grid-cols-2 gap-8  w-full h-full">
+        <div class="flex flex-col justify-start w-full h-full">
+          <h4 class="text-2xl font-semibold text-slate-900 mb-4 flex items-center">
+            <i class="fas fa-adjust text-math-green mr-3"></i>
+            Angle in a Semicircle
+          </h4>
+          <p class="text-slate-600 mb-6">Any angle formed in a semicircle (with the diameter as the base of the triangle) is always a right angle (90°).</p>
+
+          <div class="bg-slate-50 rounded-lg p-6 mb-6 w-full">
+            <h5 class="font-semibold text-slate-700 mb-4">Key Points:</h5>
+            <ul class="text-sm text-slate-600 space-y-1">
+              <li>• Angle is always exactly 90°</li>
+              <li>• Works for any point on the semicircle</li>
+              <li>• Base must be the diameter</li>
+            </ul>
+          </div>
+
+         <div class="space-y-6 w-full"> 
+  <div>
+    <label class="block text-sm font-medium text-slate-700 mb-2">Move point along semicircle</label>
+    <input id="t2-slider" type="range" min="0" max="180" step="0.1" value="90" class="w-full accent-math-green">
+    <div class="flex justify-between text-xs text-slate-500 mt-1">
+      <span>Left</span>
+      <span>Center</span>
+      <span>Right</span>
+    </div>
+  </div>
+  <div class="text-center">
+    <div class="bg-math-green bg-opacity-10 rounded-lg p-4">
+      <div class="text-sm text-slate-600">Angle at Circumference</div>
+      <div id="t2-angle-display" class="text-3xl font-bold text-math-green">90°</div>
+      <div class="text-xs text-slate-500 mt-1">Always a right angle!</div>
+    </div>
+  </div>
+</div>
+</div>  
+
+<div class="bg-slate-50 rounded-lg p-6"> 
+  <svg viewBox="0 0 400 400" class="w-full h-auto border rounded" id="svg-theorem-2">
+    <!-- Semicircle -->
+    <path d="M 50 200 A 150 150 0 0 1 350 200" fill="none" stroke="#64748b" stroke-width="2"/>
+    <line x1="50" y1="200" x2="350" y2="200" stroke="#64748b" stroke-width="2"/>
+
+    <!-- Diameter endpoints -->
+    <circle cx="50" cy="200" r="6" fill="#2563eb"/>
+    <text x="35" y="195" class="text-xs fill-slate-700">A</text>
+    <circle cx="350" cy="200" r="6" fill="#2563eb"/>
+    <text x="355" y="195" class="text-xs fill-slate-700">B</text>
+
+    <!-- Movable point on semicircle -->
+    <circle id="t2-point" r="6" fill="#059669" data-draggable="true"/>
+    <text id="t2-label-c" class="text-xs fill-slate-700">C</text>
+
+    <!-- Triangle sides -->
+    <line id="t2-line-A" x1="50" y1="200" stroke="#dc2626" stroke-width="2"/>
+    <line id="t2-line-B" x1="350" y1="200" stroke="#dc2626" stroke-width="2"/>
+
+    <!-- 90° arc at vertex C -->
+    <path id="t2-angle-arc" fill="none" stroke="#dc2626" stroke-width="2"/>
+    <text id="t2-angle-label" class="text-sm fill-math-red font-semibold">90°</text>
+  </svg>
+  <p class="text-xs text-slate-500 mt-2 text-center">Drag point C along the semicircle or use the slider.</p>
+</div>
+        </div>
+      </div>
+
+    <!-- Theorem 3: Angles in the Same Segment -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-8">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div>
+          <h4 class="text-xl font-semibold text-slate-900 mb-4 flex items-center"><i class="fas fa-slice text-math-red mr-3"></i>Angles in the Same Segment</h4>
+          <p class="text-slate-600 mb-6">Angles formed in the same segment of a circle from the same chord are equal.</p>
+
+          <div class="bg-slate-50 rounded-lg p-4 mb-6">
+            <h5 class="font-semibold text-slate-700 mb-2">Key Points:</h5>
+            <ul class="text-sm text-slate-600 space-y-1">
+              <li>• All angles subtending the same chord are equal</li>
+              <li>• Points must be on the same side of the chord</li>
+              <li>• Works for any number of points</li>
+            </ul>
+          </div>
+
+          <div class="space-y-6 w-full">
+        <div>
+          <div class="flex justify-between text-xs text-slate-500 mt-1">
+          </div>
+        </div>
+
+          <div class="grid grid-cols-2 gap-4 text-center">
+  <div class="bg-math-red bg-opacity-10 rounded-lg p-4">
+    <div class="text-sm text-slate-600">Angle P</div>
+    <div class="text-2xl font-bold text-math-red" id="angleP">–</div>
+  </div>
+  <div class="bg-math-red bg-opacity-10 rounded-lg p-4">
+    <div class="text-sm text-slate-600">Angle Q</div>
+    <div class="text-2xl font-bold text-math-red" id="angleQ">–</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="bg-slate-50 rounded-lg p-6">
+  <input type="range" id="slider" min="0" max="360" value="60" class="w-full mb-3">
+
+  <svg viewBox="0 0 400 400" id="svg-theorem-3" class="w-full h-auto border rounded">
+    <circle cx="200" cy="200" r="150" fill="none" stroke="#64748b" stroke-width="2"/>
+
+    <!-- Fixed chord endpoints -->
+    <circle id="A" r="6" fill="#2563eb"/>
+    <text id="Atxt" class="text-xs fill-slate-700">A</text>
+    <circle id="B" r="6" fill="#2563eb"/>
+    <text id="Btxt" class="text-xs fill-slate-700">B</text>
+    <line id="AB" stroke="#64748b" stroke-width="2"/>
+
+    <!-- Movable points in same segment -->
+    <circle id="P" r="6" fill="#dc2626"/>
+    <text id="Ptxt" class="text-xs fill-slate-700">P</text>
+    <circle id="Q" r="6" fill="#dc2626"/>
+    <text id="Qtxt" class="text-xs fill-slate-700">Q</text>
+
+    <!-- Connecting lines -->
+    <line id="AP" stroke="#dc2626" stroke-width="2"/>
+    <line id="BP" stroke="#dc2626" stroke-width="2"/>
+    <line id="AQ" stroke="#dc2626" stroke-width="2"/>
+    <line id="BQ" stroke="#dc2626" stroke-width="2"/>
+
+    <!-- Arcs -->
+    <path id="arcP" stroke="#dc2626" stroke-width="2" fill="none" opacity="0.7"/>
+    <path id="arcQ" stroke="#dc2626" stroke-width="2" fill="none" opacity="0.7"/>
+
+    <!-- Arc labels -->
+    <text id="arcLabelP" class="text-xs fill-math-red font-semibold"></text>
+    <text id="arcLabelQ" class="text-xs fill-math-red font-semibold"></text>
+  </svg>
+
+  <p class="text-xs text-slate-500 mt-2 text-center">Slide to rotate P and Q around the circle and see equal angles in the same segment.</p>
+</div>
+</div>
+</div>
+
+
+    <!-- Theorem 4: Opposite Angles in Cyclic Quadrilateral -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 w-full min-h-screen">
+      <div class="grid lg:grid-cols-2 gap-8 w-full h-full">
+
+        <div class="flex flex-col justify-start w-full h-full">
+          <h4 class="text-xl font-semibold text-slate-900 mb-4 flex items-center"><i class="fas fa-vector-square text-math-amber mr-3"></i>Opposite Angles in Cyclic Quadrilateral</h4>
+          <p class="text-slate-600 mb-6">In a cyclic quadrilateral (a four-sided shape with all vertices on the circle), the sum of opposite angles is always 180°.</p>
+
+          <div class="bg-slate-50 rounded-lg p-4 mb-6">
+            <h5 class="font-semibold text-slate-700 mb-4">Key Points:</h5>
+            <ul class="text-sm text-slate-600 space-y-1">
+              <li>• Opposite angles are supplementary</li>
+              <li>• Sum = 180° for each pair</li>
+              <li>• All vertices must be on the circle</li>
+            </ul>
+          </div>
+
+          <div class="space-y-6 w-full">
+        <div>
+          <div class="flex justify-between text-xs text-slate-500 mt-1">
+          </div>
+          
+        </div>
+
+          <!-- Theorem 4: Opposite Angles in a Cyclic Quadrilateral -->
+
+
+      <div class="grid grid-cols-2 gap-4 text-center mb-2">
+        <div class="bg-math-amber bg-opacity-10 rounded-lg p-3">
+          <div class="text-sm text-slate-600">∠A</div>
+          <div id="t4-A" class="text-xl font-bold text-math-amber">–</div>
+        </div>
+        <div class="bg-math-amber bg-opacity-10 rounded-lg p-3">
+          <div class="text-sm text-slate-600">∠C</div>
+          <div id="t4-C" class="text-xl font-bold text-math-amber">–</div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-center">
+        <div class="bg-math-blue bg-opacity-10 rounded-lg p-3">
+          <div class="text-sm text-slate-600">∠B</div>
+          <div id="t4-B" class="text-xl font-bold text-math-blue">–</div>
+        </div>
+        <div class="bg-math-blue bg-opacity-10 rounded-lg p-3">
+          <div class="text-sm text-slate-600">∠D</div>
+          <div id="t4-D" class="text-xl font-bold text-math-blue">–</div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4 p-3 bg-green-50 rounded-lg">
+        <div class="text-sm text-slate-600">
+          A + C = <span id="t4-sum-AC" class="font-bold text-green-600">–</span>
+        </div>
+        <div class="text-sm text-slate-600">
+          B + D = <span id="t4-sum-BD" class="font-bold text-green-600">–</span>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="bg-slate-50 rounded-lg p-6">
+      <svg viewBox="0 0 400 400" id="svg-theorem-4" class="w-full h-auto border rounded">
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#64748b" stroke-width="2"/>
+        <!-- draggable vertices on circle -->
+        <circle id="t4-A-pt" r="6" fill="#f59e0b" data-draggable="true"/>
+        <text id="t4-A-lbl" class="text-xs fill-slate-700">A</text>
+        <circle id="t4-B-pt" r="6" fill="#2563eb" data-draggable="true"/>
+        <text id="t4-B-lbl" class="text-xs fill-slate-700">B</text>
+        <circle id="t4-C-pt" r="6" fill="#f59e0b" data-draggable="true"/>
+        <text id="t4-C-lbl" class="text-xs fill-slate-700">C</text>
+        <circle id="t4-D-pt" r="6" fill="#2563eb" data-draggable="true"/>
+        <text id="t4-D-lbl" class="text-xs fill-slate-700">D</text>
+
+        <!-- sides -->
+        <line id="t4-AB" stroke="#64748b" stroke-width="2"/>
+        <line id="t4-BC" stroke="#64748b" stroke-width="2"/>
+        <line id="t4-CD" stroke="#64748b" stroke-width="2"/>
+        <line id="t4-DA" stroke="#64748b" stroke-width="2"/>
+      </svg>
+      <p class="text-xs text-slate-500 mt-2 text-center">Drag A, B, C, D (points stay on the circle).</p>
+    </div>
+  </div>
+</div>
+
+   
+   <!-- Theorem 5: Alternate Segment Theorem -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-8">
+  <div class="grid lg:grid-cols-2 gap-8">
+    <div>
+      <h4 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+        <i class="fas fa-tangent text-indigo-500 mr-3"></i>
+        Alternate Segment Theorem
+      </h4>
+      <p class="text-slate-600 mb-6">
+        The angle between a tangent and a chord at the point of contact equals the angle in the alternate segment.
+      </p>
+
+      <div class="bg-slate-50 rounded-lg p-4 mb-6">
+        <h5 class="font-semibold text-slate-700 mb-2">Key Points:</h5>
+        <ul class="text-sm text-slate-600 space-y-1">
+          <li>• Tangent meets the circle at T</li>
+          <li>• Angle (tangent vs chord) = inscribed angle on opposite arc</li>
+          <li>• Drag P or T on the circle</li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 text-center">
+        <div class="bg-indigo-50 rounded-lg p-3">
+          <div class="text-sm text-slate-600">Tangent–Chord Angle</div>
+          <div id="t5-tc" class="text-2xl font-bold text-indigo-600">–</div>
+        </div>
+        <div class="bg-indigo-50 rounded-lg p-3">
+          <div class="text-sm text-slate-600">Alternate Segment Angle</div>
+          <div id="t5-alt" class="text-2xl font-bold text-indigo-600">–</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-slate-50 rounded-lg p-6">
+      <svg  viewBox="0 0 400 400" id="svg-theorem-5" class="w-full h-auto border rounded">
+        <circle id="t5-circle" cx="200" cy="200" r="150" fill="none" stroke="#64748b" stroke-width="2"/>
+        <!-- points on circle -->
+        <circle id="t5-T" r="6" fill="#059669" data-draggable="true"/>
+        <text id="t5-Tlbl" class="text-xs fill-slate-700">T</text>
+        <circle id="t5-P" r="6" fill="#2563eb" data-draggable="true"/>
+        <text id="t5-Plbl" class="text-xs fill-slate-700">P</text>
+        <circle id="t5-Q" r="6" fill="#dc2626" data-draggable="true"/>
+        <text id="t5-Qlbl" class="text-xs fill-slate-700">Q</text>
+
+        <!-- chord TP and tangent at T -->
+        <line id="t5-TP" stroke="#64748b" stroke-width="2"/>
+        <line id="t5-tangent" stroke="#059669" stroke-width="2" stroke-dasharray="6,6"/>
+
+        <!-- triangle PQ T to show alternate segment angle -->
+        <line id="t5-PQ" stroke="#64748b" stroke-width="2"/>
+        <line id="t5-QT" stroke="#64748b" stroke-width="2"/>
+
+        <!-- small right-mark at T between chord & tangent -->
+       <!-- arc at T between chord & tangent -->
+        <path id="t5-arcTC" d="" fill="none" stroke="#059669" stroke-width="2"/>
+        <text id="t5-arcTCtxt" class="text-xs fill-slate-700 font-semibold"></text>
+
+
+        <!-- inscribed angle arc at Q -->
+        <path id="t5-arcQ" fill="none" stroke="#2563eb" stroke-width="2" opacity="0.85"/>
+        <text id="t5-arcQtxt" class="text-xs fill-slate-700 font-semibold"></text>
+      </svg>
+      <p class="text-xs text-slate-500 mt-2 text-center">Drag T, P, or Q around the circle.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 6: Tangent from a Point to a Circle -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-8">
+  <div class="grid lg:grid-cols-2 gap-8">
+    <div>
+      <h4 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+        <i class="fas fa-external-link-alt text-purple-500 mr-3"></i>
+        Tangents from an External Point
+      </h4>
+      <p class="text-slate-600 mb-6">
+        From a point outside a circle, two tangents can be drawn and their lengths are equal.
+      </p>
+
+      <div class="bg-slate-50 rounded-lg p-4 mb-6">
+        <h5 class="font-semibold text-slate-700 mb-2">Key Points:</h5>
+        <ul class="text-sm text-slate-600 space-y-1">
+          <li>• External point E has two tangents ET₁ and ET₂</li>
+          <li>• |ET₁| = |ET₂| always</li>
+          <li>• Drag E to see equality preserved</li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 text-center">
+        <div class="bg-purple-50 rounded-lg p-3">
+          <div class="text-sm text-slate-600">|ET₁|</div>
+          <div id="t6-l1" class="text-2xl font-bold text-purple-600">–</div>
+        </div>
+        <div class="bg-purple-50 rounded-lg p-3">
+          <div class="text-sm text-slate-600">|ET₂|</div>
+          <div id="t6-l2" class="text-2xl font-bold text-purple-600">–</div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4 p-3 bg-green-50 rounded-lg">
+        <div class="text-sm text-slate-600">
+          Difference: <span id="t6-diff" class="font-bold text-green-600">–</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-slate-50 rounded-lg p-6">
+      <svg viewBox="0 0 400 400" id="svg-theorem-6" class="w-full h-auto border rounded">
+        <circle id="t6-circle" cx="200" cy="200" r="140" fill="none" stroke="#64748b" stroke-width="2"/>
+        <circle id="t6-E" r="6" fill="#a855f7" data-draggable="true"/>
+        <text id="t6-Elbl" class="text-xs fill-slate-700">E</text>
+        <!-- tangent points (computed) -->
+        <circle id="t6-T1" r="5" fill="#059669"/>
+        <text id="t6-T1lbl" class="text-xs fill-slate-700">T₁</text>
+        <circle id="t6-T2" r="5" fill="#059669"/>
+        <text id="t6-T2lbl" class="text-xs fill-slate-700">T₂</text>
+
+        <!-- tangents -->
+        <line id="t6-ET1" stroke="#a855f7" stroke-width="2"/>
+        <line id="t6-ET2" stroke="#a855f7" stroke-width="2"/>
+
+        <!-- radii to tangent points -->
+        <line id="t6-OT1" stroke="#059669" stroke-width="2" stroke-dasharray="4,4"/>
+        <line id="t6-OT2" stroke="#059669" stroke-width="2" stroke-dasharray="4,4"/>
+      </svg>
+      <p class="text-xs text-slate-500 mt-2 text-center">Drag the external point E.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Theorem 7: Radius and Tangent -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-8">
+  <div class="grid lg:grid-cols-2 gap-8">
+    <div>
+      <h4 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+        <i class="fas fa-crosshairs text-pink-500 mr-3"></i>
+        Radius and Tangent
+      </h4>
+      <p class="text-slate-600 mb-6">
+        The radius drawn to the point of tangency is always perpendicular to the tangent.
+      </p>
+
+      <div class="bg-slate-50 rounded-lg p-4 mb-6">
+        <h5 class="font-semibold text-slate-700 mb-2">Key Points:</h5>
+        <ul class="text-sm text-slate-600 space-y-1">
+          <li>• OT ⟂ tangent at T</li>
+          <li>• Drag T around the circle</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-slate-50 rounded-lg p-6">
+      <svg viewBox="0 0 400 400" id="svg-theorem-7" class="w-full h-auto border rounded">
+        <circle id="t7-circle" cx="200" cy="200" r="120" fill="none" stroke="#64748b" stroke-width="2"/>
+        <circle id="t7-O" cx="200" cy="200" r="4" fill="#2563eb"/>
+        <text x="208" y="195" class="text-xs fill-slate-700">O</text>
+
+        <circle id="t7-T" r="6" fill="#ef4444" data-draggable="true"/>
+        <text id="t7-Tlbl" class="text-xs fill-slate-700">T</text>
+
+        <line id="t7-OT" stroke="#2563eb" stroke-width="2"/>
+        <line id="t7-tangent" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,6"/>
+
+        <!-- right angle marker at T -->
+        <path id="t7-rt" stroke="#ef4444" fill="none" stroke-width="2"/>
+        <text id="t7-rtlbl" class="text-xs fill-slate-700 font-semibold">90°</text>
+      </svg>
+      <p class="text-xs text-slate-500 mt-2 text-center">Drag T around the circle.</p>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- ---------- Footer ---------- -->
+<footer class="bg-slate-900 text-white py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8">
+      <div>
+        <div class="flex items-center space-x-3 mb-4">
+          <i class="fas fa-calculator text-2xl text-math-blue"></i>
+          <h6 class="text-xl font-bold">MathTools</h6>
+        </div>
+        <p class="text-slate-400 text-sm">Interactive mathematics learning platform for students and educators.</p>
+      </div>
+      <div>
+        <h6 class="font-semibold mb-4">Tools</h6>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="#base-conversion" class="hover:text-white transition-colors">Base Converter</a></li>
+          <li><a href="#circle-theorems" class="hover:text-white transition-colors">Circle Theorems</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">More Coming Soon</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6 class="font-semibold mb-4">Resources</h6>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Tutorials</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Examples</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6 class="font-semibold mb-4">Connect</h6>
+        <div class="flex space-x-4">
+          <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-github text-xl"></i></a>
+          <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+          <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 mt-8 pt-8 text-center text-sm text-slate-400">
+      © <span id="year">2024</span> MathTools. Built for educational purposes.
+    </div>
+  </div>
+</footer>
+
+<!-- ---------- Interactive Script ---------- -->
+<script>
+/* ====== UTIL: digits mapping ====== */
+const DIGITS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+function digitValue(ch) {
+  const c = (ch||'').toUpperCase();
+  const idx = DIGITS.indexOf(c);
+  return idx >= 0 ? idx : NaN;
+}
+function valueToDigit(v) {
+  return DIGITS[v] || '?';
+}
+function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+
+/* ====== BASE CONVERTER INTERACTION ====== */
+(function() {
+  const input = document.getElementById('bc-input');
+  const fromSel = document.getElementById('bc-from');
+  const toSel = document.getElementById('bc-to');
+  const btn = document.getElementById('bc-convert');
+  const swapBtn = document.getElementById('bc-swap');
+  const out = document.getElementById('bc-result');
+  const notation = document.getElementById('bc-notation');
+  const stepsPanel = document.getElementById('bc-steps');
+
+  function showSteps(convertInfo) {
+    // convertInfo: { input, fromBase, toBase, decimal, toDigits[], stepsToDecimal[], divisionSteps[] }
+    const { input, fromBase, toBase, decimal, stepsToDecimal, divisionSteps, remainders, final } = convertInfo;
+
+    // Build HTML
+    const toDecimalHtml = `
+      <div class="bg-white rounded-lg p-4 border-l-4 border-math-blue">
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 bg-math-blue text-white rounded-full flex items-center justify-center text-sm font-semibold mr-3">1</div>
+          <h6 class="font-semibold text-slate-900">Convert to Decimal</h6>
+        </div>
+        <div class="ml-11 space-y-1 font-mono text-sm text-slate-600">
+          ${stepsToDecimal.map(s => `<div>${s}</div>`).join('')}
+          <div class="mt-2 font-semibold text-slate-800">Decimal value = ${decimal}</div>
+        </div>
+      </div>
+    `;
+
+    const divisionHtml = `
+      <div class="bg-white rounded-lg p-4 border-l-4 border-math-green">
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 bg-math-green text-white rounded-full flex items-center justify-center text-sm font-semibold mr-3">2</div>
+          <h6 class="font-semibold text-slate-900">Divide by Target Base</h6>
+        </div>
+        <div class="ml-11 space-y-1 font-mono text-sm text-slate-600">
+          ${divisionSteps.map(s => `<div>${s}</div>`).join('')}
+          <div class="mt-2 font-semibold text-slate-800">Remainders (bottom → top): ${remainders.join(', ')}</div>
+        </div>
+      </div>
+    `;
+
+    const readHtml = `
+      <div class="bg-white rounded-lg p-4 border-l-4 border-math-red">
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 bg-math-red text-white rounded-full flex items-center justify-center text-sm font-semibold mr-3">3</div>
+          <h6 class="font-semibold text-slate-900">Read Remainders</h6>
+        </div>
+        <div class="ml-11 text-slate-600 font-mono">${final} (base ${toBase})</div>
+      </div>
+    `;
+
+    stepsPanel.innerHTML = toDecimalHtml + divisionHtml + readHtml;
+  }
+
+  function parseAndConvert() {
+    const raw = (input.value||'').trim();
+    const from = parseInt(fromSel.value,10) || 10;
+    const to = parseInt(toSel.value,10) || 10;
+
+    if (!raw) {
+      out.textContent = '—';
+      notation.textContent = 'Enter a number and select bases';
+      return;
+    }
+
+    // Validate digit characters
+    const s = raw.replace(/\s+/g,'').toUpperCase();
+    let invalidChar = null;
+    for (let ch of s) {
+      if (digitValue(ch) >= from || isNaN(digitValue(ch))) {
+        invalidChar = ch; break;
+      }
+    }
+    if (invalidChar) {
+      out.textContent = 'Invalid input';
+      notation.textContent = `Character "${invalidChar}" not valid for base ${from}`;
+      return;
+    }
+
+    // Convert to decimal with steps
+    const n = s.length;
+    const stepsToDecimal = [];
+    let decimal = 0;
+    for (let i = 0; i < n; i++) {
+      const ch = s[i];
+      const pos = n - 1 - i;
+      const val = digitValue(ch);
+      const contribution = val * Math.pow(from, pos);
+      stepsToDecimal.push(`${ch} × ${from}^${pos} = ${val} × ${from**pos} = ${contribution}`);
+      decimal += contribution;
+    }
+
+    // Convert decimal to target base using repeated division
+    if (decimal === 0) {
+      var final = "0";
+      var divisionSteps = ["0 is zero → result 0"];
+      var remainders = ["0"];
+    } else {
+      let temp = decimal;
+      const remainders = [];
+      const divisionSteps = [];
+      while (temp > 0) {
+        const q = Math.floor(temp / to);
+        const r = temp % to;
+        divisionSteps.push(`${temp} ÷ ${to} = ${q} remainder ${r} (${valueToDigit(r)})`);
+        remainders.push(valueToDigit(r));
+        temp = q;
+      }
+      const final = remainders.slice().reverse().join('');
+      // show results
+      showSteps({ input: s, fromBase: from, toBase: to, decimal, stepsToDecimal, divisionSteps, remainders: remainders.slice().reverse(), final });
+      out.textContent = final + ` (base ${to})`;
+      notation.textContent = `${s} (base ${from}) → ${final} (base ${to})`;
+      return;
+    }
+
+    // decimal === 0 case
+    showSteps({ input: s, fromBase: from, toBase: to, decimal, stepsToDecimal, divisionSteps, remainders, final });
+    out.textContent = final + ` (base ${to})`;
+    notation.textContent = `${s} (base ${from}) → ${final} (base ${to})`;
+  }
+
+  btn.addEventListener('click', parseAndConvert);
+  swapBtn.addEventListener('click', function(){
+    const oldA = fromSel.value, oldB = toSel.value;
+    fromSel.value = oldB; toSel.value = oldA;
+    parseAndConvert();
+  });
+
+  // live update as user types or changes base
+  [input, fromSel, toSel].forEach(el=>{
+    el.addEventListener('input', () => {
+      // small debounce
+      if (window._bc_to) clearTimeout(window._bc_to);
+      window._bc_to = setTimeout(parseAndConvert, 300);
+    });
+  });
+})();
+
+/* ====== SVG / Geometry INTERACTIONS ====== */
+(function() {
+  // helper: svg client -> svg coords
+  function svgPoint(svg, clientX, clientY) {
+    const pt = svg.createSVGPoint();
+    pt.x = clientX; pt.y = clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  function angleBetween(a, b, c) {
+    // returns angle at b formed by a-b-c in degrees (0..180)
+    const v1x = a.x - b.x, v1y = a.y - b.y;
+    const v2x = c.x - b.x, v2y = c.y - b.y;
+    const dot = v1x*v2x + v1y*v2y;
+    const mag1 = Math.hypot(v1x, v1y), mag2 = Math.hypot(v2x, v2y);
+    if (mag1 === 0 || mag2 === 0) return 0;
+    const cosTheta = clamp(dot / (mag1 * mag2), -1, 1);
+    const theta = Math.acos(cosTheta);
+    return theta * 180 / Math.PI;
+  }
+
+  // Find nearest ancestor that contains an H4 with the theorem title (used to identify which theorem this svg belongs to)
+  function findTheoremTitle(svg) {
+    let el = svg;
+    while (el) {
+      const h4 = el.querySelector && el.querySelector('h4');
+      if (h4 && h4.textContent.trim()) return h4.textContent.trim();
+      el = el.parentElement;
+    }
+    return '';
+  }
+
+  // build mapping for circles <-> text labels and lines endpoints
+  function buildSvgMap(svg) {
+    const circles = Array.from(svg.querySelectorAll('circle'));
+    const texts = Array.from(svg.querySelectorAll('text'));
+    const lines = Array.from(svg.querySelectorAll('line'));
+
+    // map label texts (single letter like A,B,C,P,...) to nearest circle
+    const labelTexts = texts.filter(t => /^[A-Z]$/.test(t.textContent.trim()));
+    const circleData = circles.map(c => {
+      return {
+        el: c,
+        cx: parseFloat(c.getAttribute('cx')||0),
+        cy: parseFloat(c.getAttribute('cy')||0),
+        r: parseFloat(c.getAttribute('r')||0),
+        label: null,
+        textEl: null
+      };
+    });
+
+    labelTexts.forEach(t => {
+      const tx = parseFloat(t.getAttribute('x')||0), ty = parseFloat(t.getAttribute('y')||0);
+      let best = -1, bestD = Infinity;
+      circleData.forEach((c,i)=>{
+        const d = Math.hypot(c.cx - tx, c.cy - ty);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      if (best >= 0 && bestD < 30) {
+        circleData[best].label = t.textContent.trim();
+        circleData[best].textEl = t;
+      }
+    });
+
+    // lines: map endpoints to nearest circle index (if within threshold)
+    const lineMappings = lines.map(l => {
+      const x1 = parseFloat(l.getAttribute('x1')||0), y1 = parseFloat(l.getAttribute('y1')||0);
+      const x2 = parseFloat(l.getAttribute('x2')||0), y2 = parseFloat(l.getAttribute('y2')||0);
+      function findNear(x,y) {
+        let idx=-1, best=1e9;
+        circleData.forEach((c,i)=>{ const d = Math.hypot(c.cx-x, c.cy-y); if (d < best) { best = d; idx=i; } });
+        return best < 30 ? idx : -1;
+      }
+      return { el: l, from: findNear(x1,y1), to: findNear(x2,y2) };
+    });
+
+    return { circles: circleData, lines: lineMappings };
+  }
+
+  // Update DOM positions of text labels and lines after moving a circle
+  function applyUpdates(svg, map) {
+    // update circleData positions from DOM
+    map.circles.forEach(c=>{
+      c.cx = parseFloat(c.el.getAttribute('cx')||0);
+      c.cy = parseFloat(c.el.getAttribute('cy')||0);
+    });
+    // update text positions near their circle
+    map.circles.forEach(c=>{
+      if (c.textEl) {
+        // offset label slightly
+        c.textEl.setAttribute('x', (c.cx + 10).toString());
+        c.textEl.setAttribute('y', (c.cy - 8).toString());
+      }
+    });
+    // update mapped lines endpoints
+    map.lines.forEach(m=>{
+      if (m.from !== -1) {
+        m.el.setAttribute('x1', map.circles[m.from].cx);
+        m.el.setAttribute('y1', map.circles[m.from].cy);
+      }
+      if (m.to !== -1) {
+        m.el.setAttribute('x2', map.circles[m.to].cx);
+        m.el.setAttribute('y2', map.circles[m.to].cy);
+      }
+    });
+  }
+
+  // Update textual data-bind elements throughout the document
+  function setBind(name, text) {
+    document.querySelectorAll(`[data-bind="${name}"]`).forEach(el => el.textContent = text);
+  }
+
+  // Update angles for a specific svg by theorem title
+  function updateAnglesForSvg(svg, map) {
+    const title = findTheoremTitle(svg).toLowerCase();
+
+    // helper to find circle by label
+    const findByLabel = (lab) => map.circles.find(c => c.label === lab);
+
+    // Theorem 1: Angle at centre (central angle = angle O between A and B; inscribed = angle at C)
+   (() => {
+  const svg = document.getElementById('svg-theorem-1');
+  const slider = document.getElementById('t1-slider');
+  const sliderOut = document.getElementById('t1-slider-value');
+
+  const bindCentral = document.querySelector('[data-bind="centralAngle"]');
+  const bindInscribed = document.querySelector('[data-bind="inscribedAngle"]');
+
+  const O = { x: 200, y: 200 };
+  const R = 150;
+
+  const pointA = document.getElementById('pointA');
+  const pointB = document.getElementById('pointB');
+  const pointC = document.getElementById('pointC');
+
+  const labelA = document.getElementById('labelA');
+  const labelB = document.getElementById('labelB');
+  const labelC = document.getElementById('labelC');
+
+  const lineOA = document.getElementById('lineOA');
+  const lineOB = document.getElementById('lineOB');
+  const lineAB = document.getElementById('lineAB');
+  const lineCA = document.getElementById('lineCA');
+  const lineCB = document.getElementById('lineCB');
+
+  const arcO = document.getElementById('arcO');
+  const arcC = document.getElementById('arcC');
+
+  const textCentral = document.getElementById('textCentral');
+  const textInscribed = document.getElementById('textInscribed');
+
+  // ---- helpers
+  const toRad = d => d * Math.PI / 180;
+  const toDeg = r => r * 180 / Math.PI;
+  const normDeg = d => (d % 360 + 360) % 360;
+
+  function polar(cx, cy, r, angDeg) {
+    const a = toRad(angDeg);
+    return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+  }
+
+  function angleAt(cx, cy, x, y) {
+    return normDeg(toDeg(Math.atan2(y - cy, x - cx)));
+  }
+
+  function arcPath(cx, cy, r, startDeg, endDeg, forceSmall = false) {
+    const start = polar(cx, cy, r, startDeg);
+    const end = polar(cx, cy, r, endDeg);
+    let delta = normDeg(endDeg - startDeg); // CCW sweep in degrees (0..360)
+    let largeArc = (forceSmall ? 0 : (delta > 180 ? 1 : 0));
+    const sweep = 1; // CCW
+    return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} ${sweep} ${end.x} ${end.y}`;
+  }
+
+  function arcPathCWorCCW(cx, cy, r, startDeg, endDeg) {
+    // Always draw the smaller arc between start and end, choosing sweep accordingly.
+    const start = polar(cx, cy, r, startDeg);
+    const end = polar(cx, cy, r, endDeg);
+    const deltaCCW = normDeg(endDeg - startDeg);
+    const largeArc = 0; // smaller arc only
+    const sweep = (deltaCCW <= 180) ? 1 : 0; // CCW if smaller CCW; else CW
+    return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} ${sweep} ${end.x} ${end.y}`;
+  }
+
+  function svgPointFromEvent(e) {
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  // ---- state
+  let centralDeg = parseFloat(slider.value); // ∠AOB
+  let aDeg = 320; // initial A angle (on the circle)
+  let cDeg = 200; // initial C angle
+
+  // B is derived: bDeg = aDeg + centralDeg
+  const getBDeg = () => normDeg(aDeg + centralDeg);
+
+  // ---- render
+  function render() {
+    const bDeg = getBDeg();
+
+    const A = polar(O.x, O.y, R, aDeg);
+    const B = polar(O.x, O.y, R, bDeg);
+    const C = polar(O.x, O.y, R, cDeg);
+
+    // place points
+    pointA.setAttribute('cx', A.x); pointA.setAttribute('cy', A.y);
+    pointB.setAttribute('cx', B.x); pointB.setAttribute('cy', B.y);
+    pointC.setAttribute('cx', C.x); pointC.setAttribute('cy', C.y);
+
+    // labels near points
+    labelA.setAttribute('x', A.x + 5); labelA.setAttribute('y', A.y - 8);
+    labelB.setAttribute('x', B.x + 5); labelB.setAttribute('y', B.y - 8);
+    labelC.setAttribute('x', C.x - 15); labelC.setAttribute('y', C.y - 10);
+
+    // lines
+    lineOA.setAttribute('x1', O.x); lineOA.setAttribute('y1', O.y);
+    lineOA.setAttribute('x2', A.x); lineOA.setAttribute('y2', A.y);
+
+    lineOB.setAttribute('x1', O.x); lineOB.setAttribute('y1', O.y);
+    lineOB.setAttribute('x2', B.x); lineOB.setAttribute('y2', B.y);
+
+    lineAB.setAttribute('x1', A.x); lineAB.setAttribute('y1', A.y);
+    lineAB.setAttribute('x2', B.x); lineAB.setAttribute('y2', B.y);
+
+    lineCA.setAttribute('x1', C.x); lineCA.setAttribute('y1', C.y);
+    lineCA.setAttribute('x2', A.x); lineCA.setAttribute('y2', A.y);
+
+    lineCB.setAttribute('x1', C.x); lineCB.setAttribute('y1', C.y);
+    lineCB.setAttribute('x2', B.x); lineCB.setAttribute('y2', B.y);
+
+    // central arc at O
+    const r0 = 35;
+    arcO.setAttribute('d', arcPath(O.x, O.y, r0, aDeg, bDeg));
+    arcO.style.display = (centralDeg < 0.05) ? 'none' : '';
+
+    // central text at mid-angle
+    const midDeg = normDeg(aDeg + centralDeg / 2);
+    const T = polar(O.x, O.y, r0 + 18, midDeg);
+    textCentral.setAttribute('x', T.x);
+    textCentral.setAttribute('y', T.y);
+    textCentral.textContent = centralDeg.toFixed(1) + '°';
+
+    // inscribed arc at C = smaller angle between CA and CB
+    const alpha = angleAt(C.x, C.y, A.x, A.y);
+    const beta  = angleAt(C.x, C.y, B.x, B.y);
+    arcC.setAttribute('d', arcPathCWorCCW(C.x, C.y, 22, alpha, beta));
+
+    // inscribed text on angle bisector
+    const vCA = { x: (A.x - C.x), y: (A.y - C.y) };
+    const vCB = { x: (B.x - C.x), y: (B.y - C.y) };
+    const lenA = Math.hypot(vCA.x, vCA.y) || 1;
+    const lenB = Math.hypot(vCB.x, vCB.y) || 1;
+    let bis = { x: vCA.x / lenA + vCB.x / lenB, y: vCA.y / lenA + vCB.y / lenB };
+    const bl = Math.hypot(bis.x, bis.y);
+    if (bl < 1e-3) { // nearly straight; nudge perpendicular
+      const ang = toRad(alpha);
+      bis = { x: Math.cos(ang + Math.PI / 2), y: Math.sin(ang + Math.PI / 2) };
+    } else {
+      bis.x /= bl; bis.y /= bl;
+    }
+    const TI = { x: C.x + 32 * bis.x, y: C.y + 32 * bis.y };
+    textInscribed.setAttribute('x', TI.x);
+    textInscribed.setAttribute('y', TI.y);
+    textInscribed.textContent = (centralDeg / 2).toFixed(1) + '°';
+
+    // top cards
+    bindCentral.textContent = centralDeg.toFixed(1) + '°';
+    bindInscribed.textContent = (centralDeg / 2).toFixed(1) + '°';
+
+    // slider readout
+    sliderOut.textContent = centralDeg.toFixed(1) + '°';
+  }
+
+  // ---- dragging (A rotates chord; C moves freely)
+function startDrag(which, e) {
+  e.preventDefault();
+
+  const move = (ev) => {
+    const p = svgPointFromEvent(ev);
+    const ang = angleAt(O.x, O.y, p.x, p.y); // lock to circle
+
+    if (which === 'A') {
+      aDeg = ang;
+      // recompute central angle based on B
+      centralDeg = normDeg(getBDeg() - aDeg);
+      slider.value = centralDeg.toFixed(1);
+    } 
+    else if (which === 'B') {
+      // update B's angle directly
+      const bDegNew = ang;
+      centralDeg = normDeg(bDegNew - aDeg);
+      // set B's angle in state by temporarily changing aDeg's reference
+      aDeg = aDeg; // unchanged
+      slider.value = centralDeg.toFixed(1);
+    } 
+    else if (which === 'C') {
+      cDeg = ang;
+    }
+
+    render();
+  };
+
+  const end = () => {
+    window.removeEventListener('pointermove', move);
+    window.removeEventListener('pointerup', end, true);
+    window.removeEventListener('pointercancel', end, true);
+  };
+
+  window.addEventListener('pointermove', move);
+  window.addEventListener('pointerup', end, true);
+  window.addEventListener('pointercancel', end, true);
+}
+
+// Add event listeners
+pointA.addEventListener('pointerdown', (e) => startDrag('A', e));
+pointB.addEventListener('pointerdown', (e) => startDrag('B', e));
+pointC.addEventListener('pointerdown', (e) => startDrag('C', e));
+
+
+
+  // ---- slider
+  slider.addEventListener('input', () => {
+    centralDeg = parseFloat(slider.value);
+    render();
+  });
+
+  // initial render
+  render();
+})();
+
+    // Theorem 2: Angle in a Semicircle (angle at C formed by endpoints of diameter is always 90)
+  (() => {
+  const svg = document.getElementById('svg-theorem-2');
+  const slider = document.getElementById('t2-slider');
+  const angleDisplay = document.getElementById('t2-angle-display');
+
+  const ptC = document.getElementById('t2-point');
+  const lblC = document.getElementById('t2-label-c');
+
+  const lineA = document.getElementById('t2-line-A');
+  const lineB = document.getElementById('t2-line-B');
+
+  const angleArc = document.getElementById('t2-angle-arc');
+  const angleLabel = document.getElementById('t2-angle-label');
+
+  // Geometry
+  const O = { x: 200, y: 200 };
+  const R = 150;
+  const A = { x: 50,  y: 200 };
+  const B = { x: 350, y: 200 };
+
+  // Helpers
+  const toRad = d => d * Math.PI / 180;
+  const toDeg = r => r * 180 / Math.PI;
+  const normDeg = d => (d % 360 + 360) % 360;
+  const clamp = (v, mn, mx) => Math.max(mn, Math.min(mx, v));
+
+  function polar(cx, cy, r, angRad) {
+    return { x: cx + r * Math.cos(angRad), y: cy - r * Math.sin(angRad) }; // y-up
+  }
+
+  function angleFrom(P, Q) { // angle of vector Q->P in degrees (screen y-down aware)
+    return normDeg(toDeg(Math.atan2(P.y - Q.y, P.x - Q.x)));
+  }
+
+  function smallArcPathAtC(C, r, startDeg, endDeg) {
+    // Draw the smaller arc centered at C from start->end
+    const start = {
+      x: C.x + r * Math.cos(toRad(startDeg)),
+      y: C.y + r * Math.sin(toRad(startDeg)) // screen y-down for path math
+    };
+    const end = {
+      x: C.x + r * Math.cos(toRad(endDeg)),
+      y: C.y + r * Math.sin(toRad(endDeg))
+    };
+    const deltaCCW = normDeg(endDeg - startDeg);
+    const largeArc = 0; // we always want the smaller arc
+    const sweep = (deltaCCW <= 180) ? 1 : 0; // CCW if smaller CCW else CW
+    return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} ${sweep} ${end.x} ${end.y}`;
+  }
+
+  // Map slider (0..180) to top semicircle (left->top->right)
+  function CFromSlider(deg) {
+    const theta = Math.PI - toRad(deg); // π..0 across top half
+    return polar(O.x, O.y, R, theta);   // y-up polar
+  }
+
+  function drawRightAngleMarker(C, A, B, size = 20) {
+  // Vector from C→A and C→B
+  let vCA = { x: A.x - C.x, y: A.y - C.y };
+  let vCB = { x: B.x - C.x, y: B.y - C.y };
+
+  // Normalize vectors
+  let lenCA = Math.hypot(vCA.x, vCA.y);
+  let lenCB = Math.hypot(vCB.x, vCB.y);
+  vCA.x /= lenCA; vCA.y /= lenCA;
+  vCB.x /= lenCB; vCB.y /= lenCB;
+
+  // Short points inside the angle
+  let p1 = { x: C.x + vCA.x * size, y: C.y + vCA.y * size };
+  let p2 = { x: C.x + vCB.x * size, y: C.y + vCB.y * size };
+
+  // Corner of the "L" (offset slightly from p1 toward B side)
+  let corner = { x: p1.x + vCB.x * size * 0.9, y: p1.y + vCB.y * size * 0.6};
+
+  return `M ${p1.x},${p1.y} L ${corner.x},${corner.y} L ${p2.x},${p2.y}`;
+}
+  function placeC(C) {
+    // Point & label
+    ptC.setAttribute('cx', C.x);
+    ptC.setAttribute('cy', C.y);
+    lblC.setAttribute('x', C.x + 5);
+    lblC.setAttribute('y', C.y - 8);
+
+    // Triangle sides
+    lineA.setAttribute('x2', C.x);
+    lineA.setAttribute('y2', C.y);
+    lineB.setAttribute('x2', C.x);
+    lineB.setAttribute('y2', C.y);
+
+    // 90° arc at vertex C between CA and CB
+    const rArc = 22;
+
+    // Angles for the rays CA and CB in *screen* path coordinates (y-down)
+    const angCA = angleFrom(A, C); // direction from C to A
+    const angCB = angleFrom(B, C); // direction from C to B
+
+    // Build small arc path at C
+    angleArc.setAttribute('d', drawRightAngleMarker(C, A, B, 22));
+
+
+    // Angle label on the bisector
+    const vCA = { x: A.x - C.x, y: A.y - C.y };
+    const vCB = { x: B.x - C.x, y: B.y - C.y };
+    const nCA = (() => { const l = Math.hypot(vCA.x, vCA.y) || 1; return { x: vCA.x/l, y: vCA.y/l }; })();
+    const nCB = (() => { const l = Math.hypot(vCB.x, vCB.y) || 1; return { x: vCB.x/l, y: vCB.y/l }; })();
+    let bis = { x: nCA.x + nCB.x, y: nCA.y + nCB.y };
+    const bl = Math.hypot(bis.x, bis.y);
+    if (bl < 1e-6) { // nearly straight — fallback perp to CA
+      const a = Math.atan2(nCA.y, nCA.x);
+      bis = { x: Math.cos(a + Math.PI/2), y: Math.sin(a + Math.PI/2) };
+    } else {
+      bis.x /= bl; bis.y /= bl;
+    }
+    const t = rArc + 12;
+    angleLabel.setAttribute('x', C.x + bis.x * t);
+    angleLabel.setAttribute('y', C.y + bis.y * t);
+    angleLabel.textContent = '90°';
+
+    // Big display (always 90° here)
+    angleDisplay.textContent = '90°';
+  }
+
+  // --- Drag C along the semicircle (sync slider)
+  function svgPointFromEvent(e) {
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  function startDragC(e) {
+    e.preventDefault();
+    const move = (ev) => {
+      const p = svgPointFromEvent(ev);
+      const dx = p.x - O.x;
+      const dyUp = O.y - p.y; // y-up
+      let alpha = Math.atan2(dyUp, dx);   // -π..π
+      alpha = clamp(alpha, 0, Math.PI);   // clamp to top semicircle
+      const sDeg = 180 - toDeg(alpha);    // map to slider 0..180
+      slider.value = sDeg.toFixed(1);
+      updateFromSlider();
+    };
+    const end = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', end, true);
+      window.removeEventListener('pointercancel', end, true);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', end, true);
+    window.addEventListener('pointercancel', end, true);
+  }
+
+  ptC.addEventListener('pointerdown', startDragC);
+
+  // Slider handler
+  function updateFromSlider() {
+    const s = parseFloat(slider.value);
+    const C = CFromSlider(s);
+    // Static ends for the diameter lines
+    lineA.setAttribute('x1', A.x); lineA.setAttribute('y1', A.y);
+    lineB.setAttribute('x1', B.x); lineB.setAttribute('y1', B.y);
+    placeC(C);
+  }
+  slider.addEventListener('input', updateFromSlider);
+
+  // Init
+  updateFromSlider();
+})();
+    // Theorem 3: Angles in the same segment: angle at P and Q from chord AB should be equal
+   const r = 150, cx = 200, cy = 200;
+
+// fixed chord endpoints
+const angles = { A:220, B:320, P:100, Q:60 };
+
+function pointOnCircle(theta) {
+  return { x: cx + r*Math.cos(theta*Math.PI/180),
+           y: cy - r*Math.sin(theta*Math.PI/180) };
+}
+
+function angleBetween(p1, vertex, p2) {
+  const v1 = [p1.x - vertex.x, p1.y - vertex.y];
+  const v2 = [p2.x - vertex.x, p2.y - vertex.y];
+  const dot = v1[0]*v2[0] + v1[1]*v2[1];
+  const mag1 = Math.hypot(...v1), mag2 = Math.hypot(...v2);
+  return Math.acos(dot/(mag1*mag2)) * 180/Math.PI;
+}
+
+function smallArcPath(center, v1, v2, radius){
+  const a1 = Math.atan2(-v1.y, v1.x);
+  const a2 = Math.atan2(-v2.y, v2.x);
+  let diff = a2 - a1;
+  if(diff < 0) diff += 2*Math.PI;
+  const steps = 15;
+  let d = `M ${center.x} ${center.y}`;
+  for(let i=0;i<=steps;i++){
+    const ang = a1 + diff*(i/steps);
+    const x = center.x + radius*Math.cos(ang);
+    const y = center.y - radius*Math.sin(ang);
+    d += (i==0 ? " L " : " ") + x + " " + y;
+  }
+  return d;
+}
+
+function arcLabelPosition(center, v1, v2, radius){
+  // Midpoint angle
+  const a1 = Math.atan2(-v1.y, v1.x);
+  const a2 = Math.atan2(-v2.y, v2.x);
+  let mid = (a1+a2)/2;
+  if(Math.abs(a2-a1) > Math.PI) mid += Math.PI; // correct for reflex
+  const x = center.x + (radius+15)*Math.cos(mid);
+  const y = center.y - (radius+15)*Math.sin(mid);
+  return {x,y};
+}
+
+function updatePositions() {
+  const A = pointOnCircle(angles.A);
+  const B = pointOnCircle(angles.B);
+  const P = pointOnCircle(angles.P);
+  const Q = pointOnCircle(angles.Q);
+
+  // positions
+  const set = (id, pt) => {
+    document.getElementById(id).setAttribute("cx", pt.x);
+    document.getElementById(id).setAttribute("cy", pt.y);
+  }
+  set("A",A); set("B",B); set("P",P); set("Q",Q);
+
+  document.getElementById("Atxt").setAttribute("x", A.x-15);
+  document.getElementById("Atxt").setAttribute("y", A.y-10);
+  document.getElementById("Btxt").setAttribute("x", B.x+10);
+  document.getElementById("Btxt").setAttribute("y", B.y-10);
+  document.getElementById("Ptxt").setAttribute("x", P.x-15);
+  document.getElementById("Ptxt").setAttribute("y", P.y-10);
+  document.getElementById("Qtxt").setAttribute("x", Q.x+10);
+  document.getElementById("Qtxt").setAttribute("y", Q.y-10);
+
+  // lines
+  function line(id,p1,p2){
+    document.getElementById(id).setAttribute("x1",p1.x);
+    document.getElementById(id).setAttribute("y1",p1.y);
+    document.getElementById(id).setAttribute("x2",p2.x);
+    document.getElementById(id).setAttribute("y2",p2.y);
+  }
+  line("AB",A,B);
+  line("AP",A,P); line("BP",B,P);
+  line("AQ",A,Q); line("BQ",B,Q);
+
+  // angles
+  const angP = angleBetween(A,P,B).toFixed(1);
+  const angQ = angleBetween(A,Q,B).toFixed(1);
+  document.getElementById("angleP").textContent = angP+"°";
+  document.getElementById("angleQ").textContent = angQ+"°";
+
+  // arcs
+  const vAP = {x:A.x-P.x,y:A.y-P.y};
+  const vBP = {x:B.x-P.x,y:B.y-P.y};
+  document.getElementById("arcP").setAttribute("d", smallArcPath(P,vAP,vBP,25));
+
+  const vAQ = {x:A.x-Q.x,y:A.y-Q.y};
+  const vBQ = {x:B.x-Q.x,y:B.y-Q.y};
+  document.getElementById("arcQ").setAttribute("d", smallArcPath(Q,vAQ,vBQ,25));
+
+  // arc labels
+  const posP = arcLabelPosition(P,vAP,vBP,25);
+  document.getElementById("arcLabelP").setAttribute("x", posP.x);
+  document.getElementById("arcLabelP").setAttribute("y", posP.y);
+  document.getElementById("arcLabelP").textContent = angP+"°";
+
+  const posQ = arcLabelPosition(Q,vAQ,vBQ,25);
+  document.getElementById("arcLabelQ").setAttribute("x", posQ.x);
+  document.getElementById("arcLabelQ").setAttribute("y", posQ.y);
+  document.getElementById("arcLabelQ").textContent = angQ+"°";
+}
+
+document.getElementById("slider").addEventListener("input", e=>{
+  const val = +e.target.value;
+  angles.P = val;
+  angles.Q = (val+40)%360;
+  updatePositions();
+});
+
+updatePositions();
+
+    // Theorem 4: Cyclic quadrilateral angles A,B,C,D
+    if (title.includes('cyclic quadrilateral')) {
+      const A = findByLabel('A'), B = findByLabel('B'), C = findByLabel('C'), D = findByLabel('D');
+      if (A && B && C && D) {
+        const a = { x: parseFloat(A.el.getAttribute('cx')), y: parseFloat(A.el.getAttribute('cy')) };
+        const b = { x: parseFloat(B.el.getAttribute('cx')), y: parseFloat(B.el.getAttribute('cy')) };
+        const c = { x: parseFloat(C.el.getAttribute('cx')), y: parseFloat(C.el.getAttribute('cy')) };
+        const d = { x: parseFloat(D.el.getAttribute('cx')), y: parseFloat(D.el.getAttribute('cy')) };
+
+        // interior angle at A is angle between DA and AB (D-A-B)
+        const angleA = Math.round(angleBetween(d,a,b));
+        const angleB = Math.round(angleBetween(a,b,c));
+        const angleC = Math.round(angleBetween(b,c,d));
+        const angleD = Math.round(angleBetween(c,d,a));
+
+        setBind('angleA', angleA + '°');
+        setBind('angleB', angleB + '°');
+        setBind('angleC', angleC + '°');
+        setBind('angleD', angleD + '°');
+
+        // update the small angle text nodes inside svg (assumes there are four)
+        const angleTextNodes = Array.from(svg.querySelectorAll('text')).filter(t => t.textContent.includes('°'));
+        if (angleTextNodes.length >= 4) {
+          angleTextNodes[0].textContent = angleA + '°';
+          angleTextNodes[1].textContent = angleB + '°';
+          angleTextNodes[2].textContent = angleC + '°';
+          angleTextNodes[3].textContent = angleD + '°';
+        }
+      }
+    }
+  }
+
+  // Initialize each svg: make points draggable, create maps and update angles
+  function initializeInteractiveSvg(svg) {
+    const map = buildSvgMap(svg);
+    // find main circle center/radius (first circle with r>50)
+    const mainCircle = Array.from(svg.querySelectorAll('circle')).find(c => parseFloat(c.getAttribute('r')||0) > 50);
+    const cxMain = mainCircle ? parseFloat(mainCircle.getAttribute('cx')) : 200;
+    const cyMain = mainCircle ? parseFloat(mainCircle.getAttribute('cy')) : 200;
+    const rMain = mainCircle ? parseFloat(mainCircle.getAttribute('r')) : 150;
+
+    const title = findTheoremTitle(svg).toLowerCase();
+    const isSemicircle = title.includes('semicircle');
+
+    // set up drag handling using pointer events
+    let active = null;
+    let activeCircleIndex = -1;
+    let activePointerId = null;
+
+    function onPointerDown(e) {
+      if (e.target && e.target.tagName === 'circle') {
+        const circleEl = e.target;
+        // don't drag main center (small r), allow only r>=5 usually (we treat center as not draggable)
+        const radius = parseFloat(circleEl.getAttribute('r') || 0);
+        if (radius < 5) return;
+        // find index in map.circles
+        activeCircleIndex = map.circles.findIndex(c => c.el === circleEl);
+        if (activeCircleIndex === -1) return;
+        active = map.circles[activeCircleIndex];
+        activePointerId = e.pointerId;
+        circleEl.setPointerCapture(activePointerId);
+        // attach move on svg
+        svg.addEventListener('pointermove', onPointerMove);
+        svg.addEventListener('pointerup', onPointerUp);
+        svg.addEventListener('pointercancel', onPointerUp);
+      }
+    }
+
+    function onPointerMove(e) {
+      if (!active) return;
+      const pt = svgPoint(svg, e.clientX, e.clientY);
+      let nx = pt.x, ny = pt.y;
+      // constrain to circle boundary (theorems 1,2,3,4 rely on points on circle)
+      // compute angle and snap to main circle radius
+      const ang = Math.atan2(ny - cyMain, nx - cxMain);
+      let angNorm = ang;
+      // for semicircle (top half) allow angles between PI and 2PI (180..360)
+      if (isSemicircle) {
+        // convert to normalized 0..2PI
+        let an = angNorm;
+        if (an < 0) an += 2*Math.PI;
+        // top semicircle corresponds to angles in [PI, 2PI]
+        if (an < Math.PI) an = Math.PI;
+        if (an > 2*Math.PI) an = 2*Math.PI;
+        angNorm = an;
+      }
+      // place at the circle's circumference
+      nx = cxMain + rMain * Math.cos(angNorm);
+      ny = cyMain + rMain * Math.sin(angNorm);
+
+      // update the circle
+      active.el.setAttribute('cx', nx);
+      active.el.setAttribute('cy', ny);
+
+      // update map and dependent lines/texts
+      applyUpdates(svg, map);
+
+      // update theorem-specific displays
+      updateAnglesForSvg(svg, map);
+      // If this is theorem 2, keep slider in sync
+      if (title.includes('semicircle')) {
+        // compute degrees within [0..180] mapping normalized ang from PI..2PI -> 0..180
+        let an = Math.atan2(ny - cyMain, nx - cxMain);
+        if (an < 0) an += 2*Math.PI;
+        const deg = Math.round((an - Math.PI) * 180 / Math.PI);
+        const slider = document.getElementById('t2-slider');
+        if (slider) slider.value = clamp(deg, 0, 180);
+        const label = document.getElementById('t2-angle-display');
+        if (label) label.textContent = Math.round(angleBetween({x: parseFloat(map.circles.find(c=>c.label==='A').el.getAttribute('cx')), y: parseFloat(map.circles.find(c=>c.label==='A').el.getAttribute('cy'))}, {x: nx, y: ny}, {x: parseFloat(map.circles.find(c=>c.label==='B').el.getAttribute('cx')), y: parseFloat(map.circles.find(c=>c.label==='B').el.getAttribute('cy'))})) + '°';
+      }
+      // If this is theorem 1 with a slider, update slider
+      if (title.includes('angle at the centre')) {
+        // compute central angle and update t1-slider and display
+        const A = map.circles.find(c => c.label === 'A');
+        const B = map.circles.find(c => c.label === 'B');
+        if (A && B) {
+          const a = {x: parseFloat(A.el.getAttribute('cx')), y: parseFloat(A.el.getAttribute('cy'))};
+          const b = {x: parseFloat(B.el.getAttribute('cx')), y: parseFloat(B.el.getAttribute('cy'))};
+          const central = Math.round(angleBetween(a, {x:cxMain, y:cyMain}, b));
+          const slider = document.getElementById('t1-slider');
+          if (slider) slider.value = clamp(central, 0, 360);
+          const sVal = document.getElementById('t1-slider-value');
+          if (sVal) sVal.textContent = central + '°';
+          setBind('centralAngle', central + '°');
+          // inscribed
+          const C = map.circles.find(c => c.label === 'C');
+          if (C) {
+            const inscribed = Math.round(angleBetween(a, {x: parseFloat(C.el.getAttribute('cx')), y: parseFloat(C.el.getAttribute('cy'))}, b));
+            setBind('inscribedAngle', inscribed + '°');
+          }
+        }
+      }
+    }
+
+    function onPointerUp(e) {
+      if (active && active.el && typeof activePointerId === 'number') {
+        try { active.el.releasePointerCapture(activePointerId); } catch(e){}
+      }
+      active = null; activeCircleIndex = -1; activePointerId = null;
+      svg.removeEventListener('pointermove', onPointerMove);
+      svg.removeEventListener('pointerup', onPointerUp);
+      svg.removeEventListener('pointercancel', onPointerUp);
+    }
+
+    // attach pointerdown to draggable circles (we'll attach to svg and check target)
+    svg.addEventListener('pointerdown', onPointerDown);
+
+    // initialize computed angles
+    updateAnglesForSvg(svg, map);
+
+    // expose map for external updates
+    return map;
+  }
+
+  // Initialize all diagrams
+  document.querySelectorAll('svg').forEach(svg => {
+    try {
+      initializeInteractiveSvg(svg);
+    } catch (e) { /* ignore svg that aren't diagrams */ }
+  });
+
+  /* ---------- extra: wire theorem sliders ---------- */
+
+  // Theorem 1 slider: move A to create central angle while keeping B fixed
+  const t1Slider = document.getElementById('t1-slider');
+  if (t1Slider) {
+    t1Slider.addEventListener('input', e => {
+      const deg = parseFloat(e.target.value);
+      document.getElementById('t1-slider-value').textContent = Math.round(deg) + '°';
+      // find svg 1 and its map by rebuilding (simple approach)
+      const svg = document.getElementById('svg-theorem-1');
+      if (!svg) return;
+      const map = (function(){ return { circles: Array.from(svg.querySelectorAll('circle')).map(c=>({el:c, cx: parseFloat(c.getAttribute('cx')), cy: parseFloat(c.getAttribute('cy')), r: parseFloat(c.getAttribute('r')) })) }})();
+      // find main circle center
+      const main = svg.querySelector('circle[ r ]');
+      let cx = 200, cy = 200, rMain = 150;
+      const mainC = Array.from(svg.querySelectorAll('circle')).find(c=>parseFloat(c.getAttribute('r')||0) > 50);
+      if (mainC) { cx = parseFloat(mainC.getAttribute('cx')); cy = parseFloat(mainC.getAttribute('cy')); rMain = parseFloat(mainC.getAttribute('r')); }
+      const A = Array.from(svg.querySelectorAll('text')).find(t=>t.textContent.trim()==='A');
+      const B = Array.from(svg.querySelectorAll('text')).find(t=>t.textContent.trim()==='B');
+      const Ac = A ? A.previousElementSibling : null; // circle before text
+      const Bc = B ? B.previousElementSibling : null;
+      if (!Bc || !Ac) return;
+      // compute angle of B around center
+      const bx = parseFloat(Bc.getAttribute('cx')), by = parseFloat(Bc.getAttribute('cy'));
+      let angB = Math.atan2(by - cy, bx - cx);
+      // new angle for A = angB - centralAngle (use radians)
+      const centralRad = deg * Math.PI / 180;
+      const angA = angB - centralRad;
+      const nx = cx + rMain*Math.cos(angA), ny = cy + rMain*Math.sin(angA);
+      Ac.setAttribute('cx', nx); Ac.setAttribute('cy', ny);
+      // adjust A text
+      const At = Array.from(svg.querySelectorAll('text')).find(t=>t.textContent.trim()==='A');
+      if (At) { At.setAttribute('x', nx+10); At.setAttribute('y', ny-8); }
+      // update lines linked to A and B
+      // naive approach: update lines by recomputing all lines endpoints from circles (done below)
+      Array.from(svg.querySelectorAll('line')).forEach(line => {
+        const x1 = parseFloat(line.getAttribute('x1')), y1 = parseFloat(line.getAttribute('y1'));
+        const x2 = parseFloat(line.getAttribute('x2')), y2 = parseFloat(line.getAttribute('y2'));
+        // if endpoint equals previous A or B coordinate, replace
+        if (Math.abs(x1 - bx) < 1 && Math.abs(y1 - by) < 1) { line.setAttribute('x1', bx); line.setAttribute('y1', by); }
+        if (Math.abs(x2 - bx) < 1 && Math.abs(y2 - by) < 1) { line.setAttribute('x2', bx); line.setAttribute('y2', by); }
+        // update references to A by matching approximate previous coords
+      });
+      // update angle labels and bound elements by calling generic update function:
+      // (quickly re-run the full initialization for that svg)
+      try {
+        initializeInteractiveSvg(svg); // reinitialize mapping (cheap for a small svg)
+      } catch(e){}
+    });
+  }
+
+  // Theorem 2 slider: maps 0..180 to semicircle top => angle at C remains 90 but slider controls position along semicircle
+  const t2Slider = document.getElementById('t2-slider');
+  if (t2Slider) {
+    t2Slider.addEventListener('input', function(e){
+      const deg = parseFloat(e.target.value || 0);
+      // normalized rad angle = PI + deg * PI/180  (maps 0→PI to PI..2PI)
+      const ang = Math.PI + (deg * Math.PI / 180);
+      // circle center & radius (from svg)
+      const svg = document.getElementById('svg-theorem-2');
+      const main = Array.from(svg.querySelectorAll('circle')).find(c => parseFloat(c.getAttribute('r')||0) > 50);
+      const cx = main ? parseFloat(main.getAttribute('cx')) : 200;
+      const cy = main ? parseFloat(main.getAttribute('cy')) : 200;
+      const r = main ? parseFloat(main.getAttribute('r')) : 150;
+      const nx = cx + r * Math.cos(ang), ny = cy + r * Math.sin(ang);
+      const pt = svg.getElementById('t2-point');
+      if (pt) {
+        pt.setAttribute('cx', nx); pt.setAttribute('cy', ny);
+        const txt = Array.from(svg.querySelectorAll('text')).find(t=>t.textContent.trim()==='C');
+        if (txt) { txt.setAttribute('x', nx+5); txt.setAttribute('y', ny-6); }
+        // update triangle lines
+        const lineA = svg.getElementById('t2-line-A');
+        const lineB = svg.getElementById('t2-line-B');
+        if (lineA) { lineA.setAttribute('x2', nx); lineA.setAttribute('y2', ny); }
+        if (lineB) { lineB.setAttribute('x2', nx); lineB.setAttribute('y2', ny); }
+        // update angle label
+        const A = Array.from(svg.querySelectorAll('circle')).find(c=>{ const x=parseFloat(c.getAttribute('cx')), y=parseFloat(c.getAttribute('cy')); return Math.abs(x-50)<1 && Math.abs(y-200)<1; });
+        const B = Array.from(svg.querySelectorAll('circle')).find(c=>{ const x=parseFloat(c.getAttribute('cx')), y=parseFloat(c.getAttribute('cy')); return Math.abs(x-350)<1 && Math.abs(y-200)<1; });
+        if (A && B) {
+          const a = {x:parseFloat(A.getAttribute('cx')), y:parseFloat(A.getAttribute('cy'))};
+          const b = {x:parseFloat(B.getAttribute('cx')), y:parseFloat(B.getAttribute('cy'))};
+          const angle = Math.round(angleBetween(a,{x:nx,y:ny},b));
+          document.getElementById('t2-angle-display').textContent = angle + '°';
+          const label = svg.querySelector('#t2-angle-label');
+          if (label) label.textContent = angle + '°';
+        }
+      }
+    });
+  }
+
+  // make sure year is current
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+
+// ---------- helpers used by 4–7 ----------
+(function(){
+  const TAU = Math.PI * 2;
+  const toDeg = r => r * 180/Math.PI;
+  const toRad = d => d * Math.PI/180;
+  const norm = a => (a%TAU+TAU)%TAU;
+
+  function polar(cx, cy, r, angRad){ return { x: cx + r*Math.cos(angRad), y: cy + r*Math.sin(angRad) }; }
+  function angleAt(A, V, B){
+    const v1 = {x:A.x-V.x, y:A.y-V.y}, v2 = {x:B.x-V.x, y:B.y-V.y};
+    const dot = v1.x*v2.x + v1.y*v2.y;
+    const l1 = Math.hypot(v1.x, v1.y), l2 = Math.hypot(v2.x, v2.y);
+    if(!l1 || !l2) return 0;
+    return Math.acos(Math.max(-1, Math.min(1, dot/(l1*l2)))) * 180/Math.PI;
+  }
+  function arcMinor(center, r, a1, a2){
+    // a1,a2 in radians (screen y+ downward)
+    const start = polar(center.x, center.y, r, a1);
+    const end   = polar(center.x, center.y, r, a2);
+    const sweepCCW = (norm(a2 - a1) <= Math.PI) ? 1 : 0;
+    return `M ${start.x} ${start.y} A ${r} ${r} 0 0 ${sweepCCW} ${end.x} ${end.y}`;
+  }
+  function rightMarker(C, vA, vB, s=16){
+    // vA and vB are unit-ish vectors from C along the rays; draw a small square corner
+    const p1 = {x:C.x + vA.x*s, y:C.y + vA.y*s};
+    const corner = {x:p1.x + vB.x*s*0.85, y:p1.y + vB.y*s*0.85};
+    const p2 = {x:corner.x - vA.x*s*0.85, y:corner.y - vA.y*s*0.85};
+    return `M ${p1.x},${p1.y} L ${corner.x},${corner.y} L ${p2.x},${p2.y}`;
+  }
+  function unit(v){ const L = Math.hypot(v.x,v.y)||1; return {x:v.x/L,y:v.y/L}; }
+
+  // ---------- T4: cyclic quadrilateral ----------
+  (function(){
+    const svg = document.getElementById('svg-theorem-4'); if(!svg) return;
+    const O = {x:200, y:200}, R = 150;
+
+    const pts = {
+      A: document.getElementById('t4-A-pt'),
+      B: document.getElementById('t4-B-pt'),
+      C: document.getElementById('t4-C-pt'),
+      D: document.getElementById('t4-D-pt'),
+    };
+    const lbl = {
+      A: document.getElementById('t4-A-lbl'),
+      B: document.getElementById('t4-B-lbl'),
+      C: document.getElementById('t4-C-lbl'),
+      D: document.getElementById('t4-D-lbl'),
+    };
+    const lines = {
+      AB: document.getElementById('t4-AB'),
+      BC: document.getElementById('t4-BC'),
+      CD: document.getElementById('t4-CD'),
+      DA: document.getElementById('t4-DA'),
+    };
+    const out = {
+      A: document.getElementById('t4-A'),
+      B: document.getElementById('t4-B'),
+      C: document.getElementById('t4-C'),
+      D: document.getElementById('t4-D'),
+      sumAC: document.getElementById('t4-sum-AC'),
+      sumBD: document.getElementById('t4-sum-BD'),
+    };
+
+    // initial angles
+    const ang = { A: toRad(300), B: toRad(20), C: toRad(160), D: toRad(220) };
+
+    function place(name){
+      const p = polar(O.x,O.y,R, ang[name]);
+      pts[name].setAttribute('cx', p.x); pts[name].setAttribute('cy', p.y);
+      lbl[name].setAttribute('x', p.x + (name==='B'||name==='C'? 8:-16));
+      lbl[name].setAttribute('y', p.y - 8);
+      return p;
+    }
+    function line(el, p1, p2){ el.setAttribute('x1',p1.x); el.setAttribute('y1',p1.y); el.setAttribute('x2',p2.x); el.setAttribute('y2',p2.y); }
+
+    function render(){
+      const A = place('A'), B = place('B'), C = place('C'), D = place('D');
+      line(lines.AB, A, B); line(lines.BC, B, C); line(lines.CD, C, D); line(lines.DA, D, A);
+
+      const a = Math.round(angleAt(D,A,B));
+      const b = Math.round(angleAt(A,B,C));
+      const c = Math.round(angleAt(B,C,D));
+      const d = Math.round(angleAt(C,D,A));
+
+      out.A.textContent = a+'°';
+      out.B.textContent = b+'°';
+      out.C.textContent = c+'°';
+      out.D.textContent = d+'°';
+      out.sumAC.textContent = (a+c)+'°';
+      out.sumBD.textContent = (b+d)+'°';
+    }
+
+    function startDrag(which, e){
+      e.preventDefault();
+      const move = (ev)=>{
+        const pt = svg.createSVGPoint(); pt.x=ev.clientX; pt.y=ev.clientY;
+        const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+        ang[which] = Math.atan2(p.y - O.y, p.x - O.x);
+        render();
+      };
+      const end=()=>{ window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',end,true); };
+      window.addEventListener('pointermove',move); window.addEventListener('pointerup',end,true);
+    }
+    Object.keys(pts).forEach(k=> pts[k].addEventListener('pointerdown', e=>startDrag(k,e)));
+
+    render();
+  })();
+
+  // ---------- T5: Alternate Segment ----------
+  (function(){
+    const svg = document.getElementById('svg-theorem-5'); if(!svg) return;
+    const O={x:200,y:200}, R=150;
+
+    const T = document.getElementById('t5-T'),  Tl=document.getElementById('t5-Tlbl');
+    const P = document.getElementById('t5-P'),  Pl=document.getElementById('t5-Plbl');
+    const Q = document.getElementById('t5-Q'),  Ql=document.getElementById('t5-Qlbl');
+
+    const TP = document.getElementById('t5-TP');
+    const tanLine = document.getElementById('t5-tangent');
+    const PQ = document.getElementById('t5-PQ');
+    const QT = document.getElementById('t5-QT');
+
+    const arcTC = document.getElementById('t5-arcTC');
+    const arcTCtxt = document.getElementById('t5-arcTCtxt');
+    const arcQ = document.getElementById('t5-arcQ');
+    const arcQtxt = document.getElementById('t5-arcQtxt');
+
+    const outTC = document.getElementById('t5-tc');
+    const outALT= document.getElementById('t5-alt');
+
+    const ang = { T: toRad(320), P: toRad(40), Q: toRad(180) };
+
+    function placeCirclePoint(el, lbl, a){
+      const p = polar(O.x,O.y,R,a);
+      el.setAttribute('cx',p.x); el.setAttribute('cy',p.y);
+      lbl.setAttribute('x', p.x + 8); lbl.setAttribute('y', p.y - 8);
+      return p;
+    }
+    function line(el, p1, p2){ el.setAttribute('x1',p1.x); el.setAttribute('y1',p1.y); el.setAttribute('x2',p2.x); el.setAttribute('y2',p2.y); }
+
+    function tangentThrough(Tp){
+      // tangent at T is perpendicular to OT; draw long line
+      const v = unit({x: -(Tp.y - O.y), y: (Tp.x - O.x)}); // rotate radius by +90°
+      const len = 1000;
+      return { A:{x:Tp.x - v.x*len, y:Tp.y - v.y*len}, B:{x:Tp.x + v.x*len, y:Tp.y + v.y*len}, dir:v };
+    }
+
+    function render(){
+      const Tp = placeCirclePoint(T,Tl,ang.T);
+      const Pp = placeCirclePoint(P,Pl,ang.P);
+      const Qp = placeCirclePoint(Q,Ql,ang.Q);
+
+      line(TP, Tp, Pp);
+      line(PQ, Pp, Qp);
+      line(QT, Qp, Tp);
+
+      // tangent line at T
+      const tan = tangentThrough(Tp);
+      line(tanLine, tan.A, tan.B);
+
+      // Angles:
+      // (1) angle between chord TP (direction from T to P) and tangent at T
+      // (1) angle between chord TP and tangent at T
+// (1) angle between chord TP (from T→P) and tangent at T
+const vTP = unit({x:Pp.x - Tp.x, y:Pp.y - Tp.y});
+const vTan = tan.dir; 
+
+// true directed angles
+let angChord = Math.atan2(vTP.y, vTP.x);
+let angTangent = Math.atan2(vTan.y, vTan.x);
+
+// difference normalized into [0, π]
+let diff = angTangent - angChord;
+if (diff < 0) diff += 2 * Math.PI;
+if (diff > Math.PI) diff = 2 * Math.PI - diff;
+
+const angTC = Math.round(toDeg(diff));
+outTC.textContent = angTC + '°';
+
+// draw arc at T
+arcTC.setAttribute('d', arcMinor(Tp, 14, angChord, angTangent));
+arcTCtxt.setAttribute('x', Tp.x + Math.cos((angChord+angTangent)/2)*22);
+arcTCtxt.setAttribute('y', Tp.y + Math.sin((angChord+angTangent)/2)*22);
+arcTCtxt.textContent = angTC + '°';
+
+
+
+      // (2) inscribed angle at Q subtending chord TP: ∠TQP
+      const alt = Math.round(angleAt(Tp, Qp, Pp));
+      outALT.textContent = alt + '°';
+
+      // arc at Q (minor)
+      const a1 = Math.atan2(Tp.y - Qp.y, Tp.x - Qp.x);
+      const a2 = Math.atan2(Pp.y - Qp.y, Pp.x - Qp.x);
+      arcQ.setAttribute('d', arcMinor(Qp, 22, a1, a2));
+      arcQtxt.setAttribute('x', Qp.x + (Math.cos((a1+a2)/2))*34);
+      arcQtxt.setAttribute('y', Qp.y + (Math.sin((a1+a2)/2))*34);
+      arcQtxt.textContent = alt + '°';
+    }
+
+    function startDrag(which, e){
+      e.preventDefault();
+      const move=(ev)=>{
+        const pt = svg.createSVGPoint(); pt.x=ev.clientX; pt.y=ev.clientY;
+        const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+        ang[which] = Math.atan2(p.y - O.y, p.x - O.x);
+        render();
+      };
+      const end=()=>{ window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',end,true); };
+      window.addEventListener('pointermove',move); window.addEventListener('pointerup',end,true);
+    }
+    T.addEventListener('pointerdown', e=>startDrag('T',e));
+    P.addEventListener('pointerdown', e=>startDrag('P',e));
+    Q.addEventListener('pointerdown', e=>startDrag('Q',e));
+
+    render();
+  })();
+
+  // ---------- T6: two tangents from an external point ----------
+  (function(){
+    const svg = document.getElementById('svg-theorem-6'); if(!svg) return;
+    const C = document.getElementById('t6-circle');
+    const cx = parseFloat(C.getAttribute('cx')), cy = parseFloat(C.getAttribute('cy')), R = parseFloat(C.getAttribute('r'));
+
+    const E  = document.getElementById('t6-E'),  El=document.getElementById('t6-Elbl');
+    const T1 = document.getElementById('t6-T1'), T1l=document.getElementById('t6-T1lbl');
+    const T2 = document.getElementById('t6-T2'), T2l=document.getElementById('t6-T2lbl');
+
+    const ET1 = document.getElementById('t6-ET1'), ET2 = document.getElementById('t6-ET2');
+    const OT1 = document.getElementById('t6-OT1'), OT2 = document.getElementById('t6-OT2');
+
+    const L1 = document.getElementById('t6-l1'), L2 = document.getElementById('t6-l2'), DIFF = document.getElementById('t6-diff');
+
+    let Ep = { x: cx + R*1.8, y: cy - 20 }; // initial external point
+
+    function placeE(){
+      E.setAttribute('cx', Ep.x); E.setAttribute('cy', Ep.y);
+      El.setAttribute('x', Ep.x + 8); El.setAttribute('y', Ep.y - 8);
+    }
+
+    function render(){
+      placeE();
+
+      // geometry: from OE, find angles to tangent points
+      const dx = Ep.x - cx, dy = Ep.y - cy;
+      const d = Math.hypot(dx,dy);
+      if (d <= R + 1){
+        // keep E outside circle a bit
+        const k = (R+20)/d; Ep = { x: cx + dx*k, y: cy + dy*k };
+        placeE();
+      }
+
+      const theta = Math.atan2(dy, dx);
+      const alpha = Math.acos(R/d);         // offset from line OE
+      const a1 = theta + alpha, a2 = theta - alpha;
+
+      const Tp1 = { x: cx + R*Math.cos(a1), y: cy + R*Math.sin(a1) };
+      const Tp2 = { x: cx + R*Math.cos(a2), y: cy + R*Math.sin(a2) };
+
+      // draw points/labels
+      T1.setAttribute('cx',Tp1.x); T1.setAttribute('cy',Tp1.y);
+      T2.setAttribute('cx',Tp2.x); T2.setAttribute('cy',Tp2.y);
+      T1l.setAttribute('x', Tp1.x+6); T1l.setAttribute('y', Tp1.y-6);
+      T2l.setAttribute('x', Tp2.x+6); T2l.setAttribute('y', Tp2.y-6);
+
+      // tangents and radii
+      ET1.setAttribute('x1',Ep.x); ET1.setAttribute('y1',Ep.y); ET1.setAttribute('x2',Tp1.x); ET1.setAttribute('y2',Tp1.y);
+      ET2.setAttribute('x1',Ep.x); ET2.setAttribute('y1',Ep.y); ET2.setAttribute('x2',Tp2.x); ET2.setAttribute('y2',Tp2.y);
+
+      OT1.setAttribute('x1',cx); OT1.setAttribute('y1',cy); OT1.setAttribute('x2',Tp1.x); OT1.setAttribute('y2',Tp1.y);
+      OT2.setAttribute('x1',cx); OT2.setAttribute('y1',cy); OT2.setAttribute('x2',Tp2.x); OT2.setAttribute('y2',Tp2.y);
+
+     const l1 = Math.hypot(Ep.x - Tp1.x, Ep.y - Tp1.y);
+      const l2 = Math.hypot(Ep.x - Tp2.x, Ep.y - Tp2.y);
+
+      // round to same precision
+      const len = ((l1 + l2) / 2).toFixed(2);
+
+      // show equal lengths
+      L1.textContent = len;
+      L2.textContent = len;
+
+      // emphasize equality instead of numeric diff
+      DIFF.textContent = "Tangents are equal";
+
+
+    }
+
+    function startDragE(e){
+      e.preventDefault();
+      const move=(ev)=>{
+        const pt = svg.createSVGPoint(); pt.x=ev.clientX; pt.y=ev.clientY;
+        Ep = pt.matrixTransform(svg.getScreenCTM().inverse());
+        render();
+      };
+      const end=()=>{ window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',end,true); };
+      window.addEventListener('pointermove',move); window.addEventListener('pointerup',end,true);
+    }
+    E.addEventListener('pointerdown', startDragE);
+
+    render();
+  })();
+
+  // ---------- T7: radius ⟂ tangent ----------
+  (function(){
+    const svg = document.getElementById('svg-theorem-7'); if(!svg) return;
+    const C = document.getElementById('t7-circle');
+    const cx = parseFloat(C.getAttribute('cx')), cy = parseFloat(C.getAttribute('cy')), R = parseFloat(C.getAttribute('r'));
+
+    const T = document.getElementById('t7-T'), Tl = document.getElementById('t7-Tlbl');
+    const OT = document.getElementById('t7-OT');
+    const TAN = document.getElementById('t7-tangent');
+    const RT = document.getElementById('t7-rt');
+    const RTLBL = document.getElementById('t7-rtlbl');
+
+    let a = toRad(310);
+
+    function render(){
+      const Tp = polar(cx,cy,R,a);
+      T.setAttribute('cx',Tp.x); T.setAttribute('cy',Tp.y);
+      Tl.setAttribute('x',Tp.x+8); Tl.setAttribute('y',Tp.y-8);
+
+      // radius
+      OT.setAttribute('x1',cx); OT.setAttribute('y1',cy);
+      OT.setAttribute('x2',Tp.x); OT.setAttribute('y2',Tp.y);
+
+      // tangent
+      const v = unit({x: -(Tp.y - cy), y: (Tp.x - cx)}); // perpendicular to OT
+      const len = 1000;
+      TAN.setAttribute('x1', Tp.x - v.x*len);
+      TAN.setAttribute('y1', Tp.y - v.y*len);
+      TAN.setAttribute('x2', Tp.x + v.x*len);
+      TAN.setAttribute('y2', Tp.y + v.y*len);
+
+      // right angle marker at T between OT and tangent
+      const uOT  = unit({x: cx - Tp.x, y: cy - Tp.y});
+      const uTan = v;
+      RT.setAttribute('d', rightMarker(Tp, uOT, uTan, 14));
+      RTLBL.setAttribute('x', Tp.x + (uOT.x+uTan.x)*20);
+      RTLBL.setAttribute('y', Tp.y + (uOT.y+uTan.y)*20);
+      RTLBL.textContent = '90°';
+    }
+
+    function startDragT(e){
+      e.preventDefault();
+      const move=(ev)=>{
+        const pt = svg.createSVGPoint(); pt.x=ev.clientX; pt.y=ev.clientY;
+        const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+        a = Math.atan2(p.y - cy, p.x - cx);
+        render();
+      };
+      const end=()=>{ window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',end,true); };
+      window.addEventListener('pointermove',move); window.addEventListener('pointerup',end,true);
+    }
+    T.addEventListener('pointerdown', startDragT);
+
+    render();
+  })();
+})();
+</script>
+</body>
+</html>
